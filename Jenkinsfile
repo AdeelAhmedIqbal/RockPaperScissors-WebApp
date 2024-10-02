@@ -26,6 +26,10 @@ pipeline {
                 sh '''
                 tidy -errors -q index.html
                 '''
+                // Install python dependencies
+                sh '''
+                pip install -r requirements.txt
+                '''
 
                 // Run Selenium Tests
                 echo 'Running Selenium tests...'
