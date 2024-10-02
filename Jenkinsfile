@@ -57,6 +57,8 @@ pipeline {
         stage('Code Quality Analysis') {
             steps {
                 echo 'Running SonarQube analysis...'
+                sh 'echo $PATH'
+                sh 'which sonar-scanner' 
                 withSonarQubeEnv('SonarQube') {  // Uses the SonarQube server configured in Jenkins
                     sh '''
                     sonar-scanner \
