@@ -14,6 +14,8 @@ chrome_service = Service("/usr/local/bin/chromedriver")
 # Initialize the Chrome WebDriver
 driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
+time.sleep(5) 
+
 # Open your web app (adjust the URL to the correct one if necessary)
 print("Opening the web app...")
 driver.get("http://localhost")

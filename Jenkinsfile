@@ -21,6 +21,13 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
+                
+                // Start the Docker container for testing
+        	sh '''
+        	docker stop rockpaperscissors || true
+        	docker rm rockpaperscissors || true
+       	docker run -d -p 80:80 --name rockpaperscissors $DOCKER_IMAGE
+        	'''
 
                 // HTML validation using tidy
                 sh '''
@@ -38,6 +45,12 @@ pipeline {
                 # Run the Selenium test (assuming a Python-based Selenium test)
                 python3 $SELENIUM_TEST_SCRIPT
                 '''
+                
+                // Stop and remove the container after tests
+        	sh '''
+        	docker stop rockpaperscissors
+        	docker rm rockpaperscissors
+        	 '''
             }
         }
 
