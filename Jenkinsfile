@@ -24,7 +24,7 @@ pipeline {
 
                 // HTML and JavaScript validation
                 sh '''
-                if ! command -v tidy > /dev/null; then sudo apt-get install -y tidy; fi
+                if ! command -v tidy > /dev/null; then apt-get install -y tidy; fi
                 tidy -errors -q index.html
 
                 if ! command -v eslint > /dev/null; then npm install eslint -g; fi
