@@ -61,7 +61,7 @@ pipeline {
             // Use SonarQube server configured in Jenkins and run SonarQube analysis
             withSonarQubeEnv('SonarQube') {  
                 // Retrieve the SonarQube token from Jenkins credentials
-                withCredentials([string(credentialsId: 'SonarQube Token', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'SonarQubeToken', variable: 'SONAR_TOKEN')]) {
                     sh '''
                     sonar-scanner \
                         -Dsonar.projectKey=rockpaperscissors-webapp \
