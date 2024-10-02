@@ -60,10 +60,11 @@ pipeline {
         script {
             // Use SonarQube server configured in Jenkins and run SonarQube analysis
             withSonarQubeEnv('SonarQube') {  
+            	def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                 // Retrieve the SonarQube token from Jenkins credentials
                 withCredentials([string(credentialsId: 'SonarQubeToken', variable: 'SONAR_TOKEN')]) {
                     sh '''
-                    sonar-scanner \
+                    ${scannerhome}/bin/sonar-scanner \
                         -Dsonar.projectKey=rockpaperscissors-webapp \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=$SONARQUBE_URL \
