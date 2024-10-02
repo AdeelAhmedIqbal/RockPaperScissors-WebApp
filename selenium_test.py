@@ -1,7 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service 
+from selenium.webdriver.chrome.options import Options
 import time
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Enable headless mode
+chrome_options.add_argument("--no-sandbox")  # Required for running as root in some systems
+chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+chrome_options.binary_location = "/usr/bin/google-chrome"
+chrome_service = Service("/usr/local/bin/chromedriver")
 
 # Initialize the Chrome WebDriver
 driver = webdriver.Chrome()
