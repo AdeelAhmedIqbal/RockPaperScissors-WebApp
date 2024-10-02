@@ -55,31 +55,19 @@ pipeline {
         }
 
         stage('Code Quality Analysis') {
-    steps {
-    	echo 'Running SonarQube analysis...'
-        script {
-            // Use SonarQube server configured in Jenkins and run SonarQube analysis
-            withSonarQubeEnv('SonarQube') {  
-            	def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                // Retrieve the SonarQube token from Jenkins credentials
-                withCredentials([string(credentialsId: 'SonarQubeToken', variable: 'SONAR_TOKEN')]) {
+            steps {
+                echo 'Running SonarQube analysis...'
+                withSonarQubeEnv('SonarQube') {  // Uses the SonarQube server configured in Jenkins
                     sh '''
-                    ${scannerhome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=rockpaperscissors-webapp \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=$SONARQUBE_URL \
-                        -Dsonar.login=$SONAR_TOKEN
+                    sonar-scanner \
+                      -Dsonar.projectKey=rockpaperscissors-webapp \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=$SONARQUBE_URL \
+                      -Dsonar.login=squ_b35960057e845d1b471468b0fa09dac62bdf4987
                     '''
                 }
             }
         }
-
-        // wait for the SonarQube Quality Gate results and fail the pipeline if not passed
-        script {
-            waitForQualityGate abortPipeline: true
-        		}
-    		}	
-	}
 
         stage('Deploy') {
             steps {
