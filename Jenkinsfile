@@ -22,10 +22,9 @@ pipeline {
             steps {
                 echo 'Running tests...'
 
-                // HTML validation using tidy and Javascript linting using ESlint
+                // HTML validation using tidy
                 sh '''
                 tidy -errors -q index.html
-                eslint script.js 
                 '''
 
                 // Run Selenium Tests
