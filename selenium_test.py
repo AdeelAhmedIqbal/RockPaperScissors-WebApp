@@ -12,7 +12,7 @@ chrome_options.binary_location = "/usr/bin/google-chrome"
 chrome_service = Service("/usr/local/bin/chromedriver")
 
 # Initialize the Chrome WebDriver
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 # Open your web app (adjust the URL to the correct one if necessary)
 print("Opening the web app...")
