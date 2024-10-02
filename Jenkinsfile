@@ -22,12 +22,11 @@ pipeline {
             steps {
                 echo 'Running tests...'
 
-                // HTML and JavaScript validation
+                // HTML validation using tidy
                 sh '''
-                if ! command -v tidy > /dev/null; then apt-get install -y tidy; fi
                 tidy -errors -q index.html
 
-                if ! command -v eslint > /dev/null; then npm install eslint -g; fi
+		// Javascript linting using ESlint
                 eslint script.js
                 '''
 
