@@ -60,7 +60,7 @@ pipeline {
         		script {
             			withSonarQubeEnv('SonarQube') {
                 		// Use the 'tool' function to get the scanner's path
-                		def scannerHome = tool 'SonarQube Scanner'
+                		def scannerHome = tool 'SonarQube-Scanner'
                 		sh '''
                 		${scannerHome}/bin/sonar-scanner \
                   		-Dsonar.projectKey=rockpaperscissors-webapp \
