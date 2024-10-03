@@ -60,7 +60,7 @@ pipeline {
                 sh 'echo $PATH'
                 sh 'which sonar-scanner' 
                 withSonarQubeEnv('SonarQube') {
-                    def scannerHome = tool: 'SonarQube-Scanner'
+                    def scannerHome = tool 'SonarQube-Scanner'
                     sh '''
                     sonar-scanner \
                       -Dsonar.projectKey=rockpaperscissors-webapp \
