@@ -61,6 +61,11 @@ pipeline {
             			withSonarQubeEnv('SonarQube') {
                 		// Use the 'tool' function to get the scanner's path
                 		def scannerHome = tool 'SonarQube-Scanner'
+                		// Print the resolved scanner path for debugging
+                		echo "SonarQube Scanner Home: ${scannerHome}"
+                
+                		// List the contents of the bin directory for further debugging
+                		sh "ls -la ${scannerHome}/bin"
                 		sh '''
                 		${scannerHome}/bin/sonar-scanner \
                   		-Dsonar.projectKey=rockpaperscissors-webapp \
