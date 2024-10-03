@@ -60,6 +60,7 @@ pipeline {
                 sh 'echo $PATH'
                 sh 'which sonar-scanner' 
                 withSonarQubeEnv('SonarQube') {  // Uses the SonarQube server configured in Jenkins
+                    def scannerHome = tool name: 'SonarQube-Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     sh '''
                     sonar-scanner \
                       -Dsonar.projectKey=rockpaperscissors-webapp \
