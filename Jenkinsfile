@@ -55,21 +55,23 @@ pipeline {
         }
 
         stage('Code Quality Analysis') {
-            steps {
-                echo 'Running SonarQube analysis...'
-                sh 'echo $PATH'
-                sh 'which sonar-scanner' 
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                    sonar-scanner \
-                      -Dsonar.projectKey=rockpaperscissors-webapp \
-                      -Dsonar.sources=. \
-                      -Dsonar.host.url=$SONARQUBE_URL \
-                      -Dsonar.login=squ_b35960057e845d1b471468b0fa09dac62bdf4987
-                    '''
-                }
-            }
-        }
+    		steps {
+        		echo 'Running SonarQube analysis...'
+        		script {
+            			withSonarQubeEnv('SonarQube') {
+                		// Use the 'tool' function to get the scanner's path
+                		def scannerHome = tool 'SonarQube Scanner'
+                		sh '''
+                		${scannerHome}/bin/sonar-scanner \
+                  		-Dsonar.projectKey=rockpaperscissors-webapp \
+                  		-Dsonar.sources=. \
+                  		-Dsonar.host.url=$SONARQUBE_URL \
+                  		-Dsonar.login=squ_b35960057e845d1b471468b0fa09dac62bdf4987
+                		'''
+            				}
+        			}
+    			}
+		}
 
         stage('Deploy') {
             steps {
