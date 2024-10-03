@@ -66,13 +66,13 @@ pipeline {
                 
                 		// List the contents of the bin directory for further debugging
                 		sh "ls -la ${scannerHome}/bin"
-                		sh '''
+                		sh """
                 		${scannerHome}/bin/sonar-scanner \
                   		-Dsonar.projectKey=rockpaperscissors-webapp \
                   		-Dsonar.sources=. \
                   		-Dsonar.host.url=$SONARQUBE_URL \
                   		-Dsonar.login=squ_b35960057e845d1b471468b0fa09dac62bdf4987
-                		'''
+                		"""
             				}
         			}
     			}
