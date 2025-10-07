@@ -1,4 +1,5 @@
 # Use the official NGINX image from the Alpine distribution
+# test
 FROM nginx:alpine
 
 # Set the working directory inside the container
